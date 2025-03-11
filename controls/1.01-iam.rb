@@ -43,7 +43,7 @@ control "cis-gcp-#{control_id}-#{control_abbrev}" do
   # determine the organization's email domain
   case google_project(project: gcp_project_id).parent.type
   when 'organization'
-    org_domain = google_organization(name: "organizations/#{google_project(project: gcp_project_id).parent.id}").display_name
+    org_domain = "makingscience.com"
   when 'folder'
     parent = 'folder'
     folder_id = google_project(project: gcp_project_id).parent.id
@@ -52,7 +52,7 @@ control "cis-gcp-#{control_id}-#{control_abbrev}" do
         folder_id = google_resourcemanager_folder(name: "folders/#{folder_id}").parent.sub('folders/', '')
       else
         parent = 'organization'
-        org_domain = google_organization(name: google_resourcemanager_folder(name: "folders/#{folder_id}").parent.to_s).display_name
+        org_domain = "makingscience.com"
       end
     end
   end
